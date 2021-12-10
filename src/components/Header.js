@@ -4,6 +4,7 @@ import {View, Text, StyleSheet, TouchableOpacity, Platform} from 'react-native';
 import IIcon from 'react-native-vector-icons/Ionicons';
 import {Colors, AppStyles} from '../utility';
 import {useNavigation} from '@react-navigation/native';
+import {useSelector} from 'react-redux';
 
 const ICON_SIZE = 24;
 // create a component
@@ -24,6 +25,9 @@ const Header = ({
 }) => {
   const navigation = useNavigation();
   onLeftPress = () => (drawer ? null : navigation.goBack());
+  let {
+    carts: {products},
+  } = useSelector(state => state);
 
   return (
     <View style={[AppStyles.header, AppStyles.boxShadow, style]}>
@@ -43,7 +47,9 @@ const Header = ({
         <TouchableOpacity activeOpacity={0.7} onPress={onRightPress}>
           <IIcon size={ICON_SIZE} style={{width: 36}} name={rightIcon} />
           <View style={styles.budge}>
-            <Text style={{color: 'white', fontSize: 12}}>0</Text>
+            <Text style={{color: 'white', fontSize: 12}}>
+              {products ? products.length : 0}
+            </Text>
           </View>
         </TouchableOpacity>
       ) : (

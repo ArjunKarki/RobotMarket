@@ -4,8 +4,10 @@ import {Text, StyleSheet, View, FlatList, ScrollView} from 'react-native';
 import {FilterButton, Header, Product} from '../components';
 import {AppStyles, Colors, hp} from '../utility';
 import {useDispatch, useSelector} from 'react-redux';
+import {AddtoCart} from '../redux/actions/cartActions';
 import {filterRobots, getRobots} from '../redux/actions/homeActions';
 const Types = hp.getMaterialTypes();
+
 const Home = ({navigation}) => {
   const dispatch = useDispatch();
   const {filterRobots: robots} = useSelector(state => state.robots);
@@ -24,7 +26,14 @@ const Home = ({navigation}) => {
     dispatch(filterRobots(type));
   };
 
-  const onAddToCart = (item, id) => {};
+  const onAddToCart = (item, id) => {
+    let product = {
+      ...item,
+      id,
+      quantity: 1,
+    };
+    dispatch(AddtoCart(product));
+  };
 
   return (
     <View style={AppStyles.container}>

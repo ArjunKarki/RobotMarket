@@ -29,4 +29,7 @@ export default hp = {
     'Granite',
     'Metal',
   ],
+  showAlert: message => {
+    Alert.alert('Oops ! ', message, [{text: 'OK'}]);
+  },
 };
