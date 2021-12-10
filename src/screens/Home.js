@@ -1,17 +1,21 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View, FlatList, ScrollView} from 'react-native';
+import {Header} from '../components';
+import {AppStyles, Colors, hp} from '../utility';
 
 const Home = ({navigation}) => {
+  const onRighPress = () => {
+    navigation.navigate('Cart');
+  };
   return (
-    <View>
-      <Text>Home Screen</Text>
-      <TouchableOpacity style={{}} onPress={() => navigation.navigate('Cart')}>
-        <Text>go to cart</Text>
-      </TouchableOpacity>
+    <View style={AppStyles.container}>
+      <Header
+        rightIcon="cart"
+        drawer
+        onRightPress={onRighPress}
+        title="Robot Market"
+      />
     </View>
   );
 };
-
 export default Home;
-
-const styles = StyleSheet.create({});
