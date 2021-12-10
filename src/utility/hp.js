@@ -13,4 +13,6 @@ export default hp = {
       default: 0,
     });
   },
+  formatDate: (date = new Date()) => moment(date).format('DD-MM-YYYY'),
+  formatMoney: x => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
 };

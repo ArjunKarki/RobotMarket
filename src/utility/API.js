@@ -3,6 +3,7 @@ import axios from 'axios';
 const API = axios.create();
 API.interceptors.request.use(
   function (request) {
+    request.url = 'http://localhost:8000' +request.url;
     return request;
   },
   function (error) {
@@ -15,6 +16,7 @@ API.interceptors.response.use(
     return response;
   },
   function (error) {
+    console.log('ERROR==>', error);
     return Promise.reject(error);
   },
 );
