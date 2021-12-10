@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import React, {useEffect, useState} from 'react';
 import {Text, StyleSheet, View, FlatList, ScrollView} from 'react-native';
 import {FilterButton, Header, Product} from '../components';
@@ -26,8 +25,9 @@ const Home = ({navigation}) => {
     dispatch(filterRobots(type));
   };
 
-  const onAddToCart = (item, id) => {
-    let product = {
+  const onAddToCart = (item, index) => {
+    const id = index + type; //generate fake id
+    const product = {
       ...item,
       id,
       quantity: 1,

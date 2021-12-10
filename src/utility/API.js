@@ -3,7 +3,7 @@ import axios from 'axios';
 const API = axios.create();
 API.interceptors.request.use(
   function (request) {
-    request.url = 'http://localhost:8000' +request.url;
+    request.url = 'http://192.168.99.227:8000' + request.url;
     return request;
   },
   function (error) {

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   Text,
   StyleSheet,
@@ -10,19 +10,45 @@ import {
 import {Header} from '../components';
 import {AppStyles, Colors, hp} from '../utility';
 import IIcon from 'react-native-vector-icons/Ionicons';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {
+  DecreaseQunatity,
+  IncreaseQuantity,
+  RemoveFromCart,
+} from '../redux/actions/cartActions';
 const IMG_SIZE = 90;
 
 const Cart = ({}) => {
+  const dispatch = useDispatch();
+  const [totalAmount, setTotalAmount] = useState(0);
   const {
     carts: {products},
   } = useSelector(state => state);
+  console.log(products);
+  useEffect(() => {
+    let amount = 0;
+    products.map((product, index) => {
+      amount += Number(product.quantity) * Number(product.price);
+    });
+    setTotalAmount(amount.toFixed(2));
+  }, [products]);
 
-  const onRemoveFromCart = product => {};
+  const onRemoveFromCart = product => {
+    dispatch(RemoveFromCart(product));
+  };
 
-  const onIncreaseQty = product => {};
+  const onIncreaseQty = product => {
+    if (product.quantity >= product.stock) {
+      hp.showAlert(`Only ${product.stock} item in stock.`);
+      return;
+    }
+    dispatch(IncreaseQuantity(product));
+  };
 
-  const onDecreaseQty = product => {};
+  const onDecreaseQty = product => {
+    if (product.quantity <= 1) return;
+    dispatch(DecreaseQunatity(product));
+  };
 
   return (
     <View style={AppStyles.container}>
@@ -63,6 +89,7 @@ const Cart = ({}) => {
                     </TouchableOpacity>
                     <View style={styles.btnRow}>
                       <TouchableOpacity
+                        disabled={item.quantity == 1}
                         onPress={() => onDecreaseQty(item)}
                         style={styles.btn}>
                         <IIcon style={{padding: 5}} name="remove-outline" />
@@ -83,7 +110,7 @@ const Cart = ({}) => {
             <View style={styles.rowSpace}>
               <Text style={[styles.labelTxt, {fontWeight: '500'}]}>Total:</Text>
               <Text style={[styles.labelTxt, {fontWeight: 'bold'}]}>
-                ฿ 550.00
+                ฿ {hp.formatMoney(totalAmount)}
               </Text>
             </View>
             <TouchableOpacity style={styles.checkOutBtn}>

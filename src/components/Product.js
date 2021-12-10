@@ -5,7 +5,7 @@ import {AppStyles, Colors, hp} from '../utility';
 
 const Product = ({product, isOutOfStock, onAddToCart}) => {
   return (
-    <TouchableOpacity activeOpacity={0.8} style={styles.productContainer}>
+    <TouchableOpacity disabled activeOpacity={0.8} style={styles.productContainer}>
       <View style={styles.imgView}>
         <Image style={AppStyles.image} source={{uri: product.image}} />
       </View>
