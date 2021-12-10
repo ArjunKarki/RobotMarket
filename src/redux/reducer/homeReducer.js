@@ -1,4 +1,4 @@
-import {FETCH_ROBOTS} from '../const';
+import {FETCH_ROBOTS, FILTER_ROBOTS} from '../const';
 
 const initialState = {
   robots: [],
@@ -11,7 +11,12 @@ export default homeReducer = (state = initialState, action) => {
         robots: action.payload,
         filterRobots: action.payload,
       };
+    case FILTER_ROBOTS:
+      return {
+        ...state,
+        filterRobots: action.payload,
+      };
     default:
       return state;
   }
-};  
+};

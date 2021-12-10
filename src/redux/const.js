@@ -1,1 +1,3 @@
 export const FETCH_ROBOTS = 'FETCH_ROBOTS';
+export const FILTER_ROBOTS = 'FILTER_ROBOTS';
+

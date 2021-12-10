@@ -15,4 +15,18 @@ export default hp = {
   },
   formatDate: (date = new Date()) => moment(date).format('DD-MM-YYYY'),
   formatMoney: x => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+  getMaterialTypes: () => [
+    'All',
+    'Concrete',
+    'Cotton',
+    'Rubber',
+    'Fresh',
+    'Soft',
+    'Plastic',
+    'Steel',
+    'Frozen',
+    'Wooden',
+    'Granite',
+    'Metal',
+  ],
 };
